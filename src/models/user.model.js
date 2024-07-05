@@ -1,6 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import bcrypt from "bcrypt";
-import { jwt } from "jsonwebtoken";
+import pkg from 'jsonwebtoken';
+const { jwt } = pkg;
 const userSchema = new Schema(
   {
     username: {
@@ -27,7 +28,7 @@ const userSchema = new Schema(
     },
     avatar: {
       type: String,
-      required: true, // cloudinary url
+      // required: true, // cloudinary url
     },
     watchHistory: [
       {
@@ -37,7 +38,7 @@ const userSchema = new Schema(
     ],
     coverImage: {
       type: String,
-      required: true, // cloudinary url
+      // required: true, // cloudinary url
     },
     password: {
       type: String,
@@ -75,4 +76,6 @@ userSchema.methods.generateRefreshToken = function () {
     expiresIn: process.env.REFRESH_TOKEN_EXPIRY,
   });
 };
-export const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+export  default User
+
